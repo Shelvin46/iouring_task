@@ -1,13 +1,17 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:iouring_task/core/constants/color_constants.dart';
+import 'package:iouring_task/features/watchlist/data/model/watch_list_model.dart';
 
 ///[WatchListItemWidgets] is a stateless widget which returns a [Column] widget.
 ///It is a custom widget which contains the watchlist item details.
 class WatchListItemWidgets extends StatelessWidget {
   const WatchListItemWidgets({
     super.key,
+    required this.watchList,
   });
+
+  final WatchListModel watchList;
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +28,22 @@ class WatchListItemWidgets extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      "GOLD 26JUL 59500 CE",
+                      watchList.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                   ),
                   const Spacer(),
-                  const Row(
+                  Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.arrow_drop_up,
                         color: ColorConstants.primaryTealColor,
                       ),
                       Text(
-                        "298.50",
-                        style: TextStyle(
+                        "${watchList.price}",
+                        style: const TextStyle(
                           color: ColorConstants.primaryTealColor,
                           fontSize: 16,
                         ),
@@ -55,13 +59,13 @@ class WatchListItemWidgets extends StatelessWidget {
                   Expanded(
                     flex: 3,
                     child: Text(
-                      "MCX",
+                      watchList.subTitle,
                       style: Theme.of(context).textTheme.labelLarge,
                     ),
                   ),
                   const Spacer(),
                   Text(
-                    "+1.05 (0.07%)",
+                    "+${watchList.change}",
                     style: TextStyle(
                       color: Colors.grey[500],
                       fontSize: 14,

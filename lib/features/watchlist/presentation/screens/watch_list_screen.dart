@@ -1,8 +1,10 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iouring_task/core/constants/color_constants.dart';
 import 'package:iouring_task/features/base_screen/presentation/screens/base_screen.dart';
-import 'package:iouring_task/features/search/screens/search_screen.dart';
+import 'package:iouring_task/features/search/presentation/screens/search_screen.dart';
+import 'package:iouring_task/features/watchlist/presentation/blocs/watch_list/watch_list_bloc.dart';
 import 'package:iouring_task/features/watchlist/presentation/screens/widgets/watch_list_item_widget.dart';
 import 'package:iouring_task/features/watchlist/presentation/screens/widgets/watch_list_screen_title.dart';
 import 'package:iouring_task/features/widgets/custom_text_form_field.dart';
@@ -29,6 +31,25 @@ class _WatchListScreenState extends State<WatchListScreen>
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
     _focusNode = FocusNode();
+
+    context.read<WatchListBloc>().add(const GetWatchListEvent(type: "NIFTY"));
+
+    _tabController.addListener(() {
+      if (_tabController.index == 0) {
+        context
+            .read<WatchListBloc>()
+            .add(const GetWatchListEvent(type: "NIFTY"));
+      } else if (_tabController.index == 1) {
+        context
+            .read<WatchListBloc>()
+            .add(const GetWatchListEvent(type: "BANKNIFTY"));
+      } else if (_tabController.index == 2) {
+        context
+            .read<WatchListBloc>()
+            .add(const GetWatchListEvent(type: "SENSEX"));
+      }
+    });
+
     super.initState();
   }
 
@@ -94,43 +115,70 @@ class _WatchListScreenState extends State<WatchListScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                Column(
-                  children: [
-                    10.heightBox,
-                    // [CustomTextFormField] is a custom widget which contains a text field.
-                    // When the user taps on the text field, it navigates to the search screen.
-                    GestureDetector(
-                        onTap: () {
-                          _focusNode.requestFocus();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SearchScreen()));
-                        },
-                        child: CustomTextFormField(focusNode: _focusNode)),
-                    15.heightBox,
-
-                    ///[ListView.builder] is a widget which contains a list of items.
-                    ListView.builder(
-                      itemCount: 5,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        return const WatchListItemWidgets();
-                      },
-                    ),
-                  ],
-                ),
-                const Center(
-                  child: Text("Crypto"),
-                ),
-                const Center(
-                  child: Text("Commodities"),
-                ),
+                WatchListWidget(focusNode: _focusNode),
+                WatchListWidget(focusNode: _focusNode),
+                WatchListWidget(focusNode: _focusNode),
               ],
             ),
           )
         ],
       ),
     ));
+  }
+}
+
+class WatchListWidget extends StatelessWidget {
+  const WatchListWidget({
+    super.key,
+    required FocusNode focusNode,
+  }) : _focusNode = focusNode;
+
+  final FocusNode _focusNode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        10.heightBox,
+        // [CustomTextFormField] is a custom widget which contains a text field.
+        // When the user taps on the text field, it navigates to the search screen.
+        GestureDetector(
+            onTap: () {
+              _focusNode.requestFocus();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const SearchScreen()));
+            },
+            child: CustomTextFormField(focusNode: _focusNode)),
+        15.heightBox,
+
+        ///[ListView.builder] is a widget which contains a list of items.
+        BlocBuilder<WatchListBloc, WatchListState>(
+          builder: (context, state) {
+            if (state is WatchListLoading) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is WatchListError) {
+              return Center(
+                child: Text(state.failure.message),
+              );
+            } else if (state is WatchListLoaded) {
+              return ListView.builder(
+                itemCount: state.watchList.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return WatchListItemWidgets(
+                    watchList: state.watchList[index],
+                  );
+                },
+              );
+            }
+            return const SizedBox.shrink();
+          },
+        ),
+      ],
+    );
   }
 }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iouring_task/core/constants/color_constants.dart';
 import 'package:iouring_task/core/constants/text_style_constants.dart';
 import 'package:iouring_task/features/base_screen/presentation/screens/base_screen.dart';
+import 'package:iouring_task/features/watchlist/presentation/blocs/watch_list/watch_list_bloc.dart';
 
 ///[MyApp] is the entry point of the app.
 ///[MyApp] is a stateless widget which returns a [MaterialApp] widget.
@@ -59,31 +61,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Iouring',
-      theme: ThemeData(
-        scaffoldBackgroundColor: ColorConstants.white,
-        fontFamily: TextStyleConstants.fontFamily,
-        useMaterial3: true,
-        colorScheme: lightColorScheme,
-        buttonTheme: buttonThemeData,
-        textTheme: textTheme,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => WatchListBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Iouring',
+        theme: ThemeData(
+          scaffoldBackgroundColor: ColorConstants.white,
+          fontFamily: TextStyleConstants.fontFamily,
+          useMaterial3: true,
+          colorScheme: lightColorScheme,
+          buttonTheme: buttonThemeData,
+          textTheme: textTheme,
+        ),
+        darkTheme: ThemeData(
+          fontFamily: TextStyleConstants.fontFamily,
+          brightness: Brightness.dark,
+          scaffoldBackgroundColor: const Color.fromRGBO(0, 0, 0, 1),
+          useMaterial3: true,
+          colorScheme: darkColorScheme,
+          buttonTheme: buttonThemeData,
+          textTheme: textTheme,
+        ),
+        themeMode: ThemeMode.dark,
+        // themeMode: MediaQuery.platformBrightnessOf(context) == Brightness.dark
+        //     ? ThemeMode.dark
+        //     : ThemeMode.light,
+        home: const BaseScreen(),
       ),
-      darkTheme: ThemeData(
-        fontFamily: TextStyleConstants.fontFamily,
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color.fromRGBO(0, 0, 0, 1),
-        useMaterial3: true,
-        colorScheme: darkColorScheme,
-        buttonTheme: buttonThemeData,
-        textTheme: textTheme,
-      ),
-      themeMode: ThemeMode.dark,
-      // themeMode: MediaQuery.platformBrightnessOf(context) == Brightness.dark
-      //     ? ThemeMode.dark
-      //     : ThemeMode.light,
-      home: const BaseScreen(),
     );
   }
 }
