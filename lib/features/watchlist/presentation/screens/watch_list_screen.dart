@@ -7,6 +7,7 @@ import 'package:iouring_task/features/search/presentation/screens/search_screen.
 import 'package:iouring_task/features/watchlist/presentation/blocs/watch_list/watch_list_bloc.dart';
 import 'package:iouring_task/features/watchlist/presentation/screens/widgets/watch_list_item_widget.dart';
 import 'package:iouring_task/features/watchlist/presentation/screens/widgets/watch_list_screen_title.dart';
+import 'package:iouring_task/features/watchlist/presentation/screens/widgets/watch_list_widget.dart';
 import 'package:iouring_task/features/widgets/custom_text_form_field.dart';
 
 ///[WatchListScreen] is a stateful widget which returns a [Scaffold] widget.
@@ -124,61 +125,5 @@ class _WatchListScreenState extends State<WatchListScreen>
         ],
       ),
     ));
-  }
-}
-
-class WatchListWidget extends StatelessWidget {
-  const WatchListWidget({
-    super.key,
-    required FocusNode focusNode,
-  }) : _focusNode = focusNode;
-
-  final FocusNode _focusNode;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        10.heightBox,
-        // [CustomTextFormField] is a custom widget which contains a text field.
-        // When the user taps on the text field, it navigates to the search screen.
-        GestureDetector(
-            onTap: () {
-              _focusNode.requestFocus();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SearchScreen()));
-            },
-            child: CustomTextFormField(focusNode: _focusNode)),
-        15.heightBox,
-
-        ///[ListView.builder] is a widget which contains a list of items.
-        BlocBuilder<WatchListBloc, WatchListState>(
-          builder: (context, state) {
-            if (state is WatchListLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (state is WatchListError) {
-              return Center(
-                child: Text(state.failure.message),
-              );
-            } else if (state is WatchListLoaded) {
-              return ListView.builder(
-                itemCount: state.watchList.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return WatchListItemWidgets(
-                    watchList: state.watchList[index],
-                  );
-                },
-              );
-            }
-            return const SizedBox.shrink();
-          },
-        ),
-      ],
-    );
   }
 }
