@@ -13,10 +13,12 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     required FocusNode focusNode,
     this.readOnly = true,
+    this.onTap,
   }) : _focusNode = focusNode;
 
   final FocusNode _focusNode;
   final bool readOnly;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class CustomTextFormField extends StatelessWidget {
           15.widthBox,
           Expanded(
             child: TextFormField(
+              onTap: onTap,
               onTapOutside: (event) {
                 if (Platform.isIOS) {
                   _focusNode.unfocus();

@@ -26,12 +26,14 @@ class WatchListWidget extends StatelessWidget {
         GestureDetector(
             onTap: () {
               _focusNode.requestFocus();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SearchScreen()));
+              _navigateToSearchScreen(context);
             },
-            child: CustomTextFormField(focusNode: _focusNode)),
+            child: CustomTextFormField(
+              focusNode: _focusNode,
+              onTap: () {
+                _navigateToSearchScreen(context);
+              },
+            )),
         15.heightBox,
 
         ///[ListView.builder] is a widget which contains a list of items.
@@ -95,6 +97,16 @@ class WatchListWidget extends StatelessWidget {
           ],
         )
       ],
+    );
+  }
+
+  void _navigateToSearchScreen(BuildContext context) {
+    _focusNode.requestFocus();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SearchScreen(),
+      ),
     );
   }
 }
