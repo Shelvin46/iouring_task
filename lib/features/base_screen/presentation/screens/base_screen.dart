@@ -142,7 +142,7 @@ class CustomSvgPicture extends StatelessWidget {
               Theme.of(context).colorScheme.onPrimary,
               BlendMode.srcIn,
             ),
-      fit: BoxFit.scaleDown,
+      fit: BoxFit.fill,
     );
   }
 }

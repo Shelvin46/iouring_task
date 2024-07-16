@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
 
   TextTheme textTheme = TextTheme(
     displayLarge: TextStyleConstants.displayLargeTextStyle,
-    displaySmall: TextStyleConstants.displaySmallTextStyle,
+    displayMedium: TextStyleConstants.displayMediumTextStyle,
     labelSmall: TextStyleConstants.labelSmallTextStyle,
   );
 

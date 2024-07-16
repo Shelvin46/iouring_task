@@ -6,6 +6,9 @@ class TextStyleConstants {
   // main heading text style
   static const displayLargeTextStyle =
       TextStyle(fontSize: 40, fontWeight: FontWeight.bold);
+  // medium heading text style
+  static const displayMediumTextStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   // sub heading text style
   static var displaySmallTextStyle = TextStyle(
     fontSize: 20,
@@ -16,7 +19,7 @@ class TextStyleConstants {
       GoogleFonts.roboto(fontWeight: FontWeight.w600).fontFamily;
   // label small or hint  text style
   static var labelSmallTextStyle = TextStyle(
-    fontSize: 12,
+    fontSize: 15,
     fontFamily: GoogleFonts.roboto(fontWeight: FontWeight.w600).fontFamily,
   );
 }
