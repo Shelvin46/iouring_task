@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:iouring_task/core/constants/color_constants.dart';
-import 'package:iouring_task/features/base_screen/presentation/screens/base_screen.dart';
+import 'package:iouring_task/core/bottom_navigation_widget/bottom_navigation_screen.dart';
 
 ///[CustomTextFormField] is a stateless widget which returns a [Container] widget.
 ///It is a custom text form field which contains a search icon, a text form field and two icons.

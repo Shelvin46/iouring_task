@@ -25,50 +25,54 @@ class _BaseScreenState extends State<BaseScreen> {
     return Scaffold(
         body: const WatchListScreen(),
         bottomNavigationBar: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                  enableFeedback: false,
-                  onPressed: () {},
-                  icon: const RootBottomNavigationBarIcon(
-                    image:
-                        "assets/features/base_screen/bookmark-svgrepo-com (1).svg",
-                    pageName: "Watchlist",
-                    color: ColorConstants.primaryTealColor,
-                  )),
-              IconButton(
-                  enableFeedback: false,
-                  onPressed: () {},
-                  icon: const RootBottomNavigationBarIcon(
-                    image: "assets/features/base_screen/bag-4-svgrepo-com.svg",
-                    pageName: "Orders",
-                  )),
-              IconButton(
-                  enableFeedback: false,
-                  onPressed: () {},
-                  icon: const RootBottomNavigationBarIcon(
-                    image:
-                        "assets/features/base_screen/portfolio-svgrepo-com.svg",
-                    pageName: "Portfolio",
-                  )),
-              IconButton(
-                  enableFeedback: false,
-                  onPressed: () {},
-                  icon: const RootBottomNavigationBarIcon(
-                    image:
-                        "assets/features/base_screen/graph-bar-svgrepo-com.svg",
-                    pageName: 'Movers',
-                  )),
-              IconButton(
-                  enableFeedback: false,
-                  onPressed: () {},
-                  icon: const RootBottomNavigationBarIcon(
-                    image:
-                        "assets/features/base_screen/more-circle-svgrepo-com (1).svg",
-                    pageName: "More",
-                  )),
-            ],
+          child: Container(
+            color: Colors.grey[900],
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                IconButton(
+                    enableFeedback: false,
+                    onPressed: () {},
+                    icon: const RootBottomNavigationBarIcon(
+                      image:
+                          "assets/features/base_screen/bookmark-svgrepo-com (1).svg",
+                      pageName: "Watchlist",
+                      color: ColorConstants.primaryTealColor,
+                    )),
+                IconButton(
+                    enableFeedback: false,
+                    onPressed: () {},
+                    icon: const RootBottomNavigationBarIcon(
+                      image:
+                          "assets/features/base_screen/bag-4-svgrepo-com.svg",
+                      pageName: "Orders",
+                    )),
+                IconButton(
+                    enableFeedback: false,
+                    onPressed: () {},
+                    icon: const RootBottomNavigationBarIcon(
+                      image:
+                          "assets/features/base_screen/portfolio-svgrepo-com.svg",
+                      pageName: "Portfolio",
+                    )),
+                IconButton(
+                    enableFeedback: false,
+                    onPressed: () {},
+                    icon: const RootBottomNavigationBarIcon(
+                      image:
+                          "assets/features/base_screen/graph-bar-svgrepo-com.svg",
+                      pageName: 'Movers',
+                    )),
+                IconButton(
+                    enableFeedback: false,
+                    onPressed: () {},
+                    icon: const RootBottomNavigationBarIcon(
+                      image:
+                          "assets/features/base_screen/more-circle-svgrepo-com (1).svg",
+                      pageName: "More",
+                    )),
+              ],
+            ),
           ),
         ));
   }

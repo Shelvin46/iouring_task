@@ -1,6 +1,6 @@
 import 'package:awesome_extensions/awesome_extensions.dart';
 import 'package:flutter/material.dart';
-import 'package:iouring_task/features/base_screen/presentation/screens/base_screen.dart';
+import 'package:iouring_task/core/bottom_navigation_widget/bottom_navigation_screen.dart';
 
 ///[WatchListScreenTitle] is a stateless widget which returns a [Container] widget.
 ///It is a custom title widget which contains the title of the screen and a pin icon.

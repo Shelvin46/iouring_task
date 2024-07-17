@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iouring_task/core/constants/color_constants.dart';
 import 'package:iouring_task/core/constants/text_style_constants.dart';
-import 'package:iouring_task/features/base_screen/presentation/screens/base_screen.dart';
+import 'package:iouring_task/core/bottom_navigation_widget/bottom_navigation_screen.dart';
 import 'package:iouring_task/features/watchlist/presentation/blocs/watch_list/watch_list_bloc.dart';
 
 ///[MyApp] is the entry point of the app.
